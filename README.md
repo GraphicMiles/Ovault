@@ -28,12 +28,25 @@ Open http://localhost:8765 — the app is hash-routed (`#/`, `#/pick`, `#/repo/i
 | `tools/cmap.py` | Color-quantized ASCII visual audit |
 | `shots/` | Breakpoint screenshots (mobile / tablet / desktop / wide) |
 
-## Design system — monochrome base, semantic accents
+## Design system — monochrome base (dark arrangement), semantic accents
 
-- **Canvas** Cadet Grey `#A3A5A9` · **Surfaces** Seasalt `#FAFAFA` · **Ink** Black `#050505` / Eerie Black `#212529`
-- **No shadows, no borders, no focus outlines** — elevation comes from surface contrast only
-- Pill geometry, compact padding, icon-font icons (FontAwesome), soft-filled inputs
-- Accents (green / amber / red / blue) are reserved for **special UI only**: status chips, banners, progress, destructive actions, and brand moments
+The locked 4-tone palette governs the base UI; this build arranges it **dark** — app
+background dark, elevated surfaces lighter dark. Semantic accents are reserved for special UI.
+
+| Role | Token | Hex | Use |
+|---|---|---|---|
+| App background | `--bg` | `#050505` (Black) | canvas, recessed code preview |
+| Surfaces | `--surface` | `#212529` (Eerie Black) | cards, rail, topbar chrome, modal, toast, hero, demo bar |
+| Surface insets | `--surface-2` / `--surface-3` | `#2b3036` / `#363c43` (derived) | fields, soft pills, unchecked checks, hover states |
+| Text | `--ink` / `--ink-2` | `#fafafa` (Seasalt) / `#a3a5a9` (Cadet Grey) | headings / secondary |
+| Text meta | `--ink-3` / `--ink-4` | `#8b9096` / `#767c82` (derived) | labels, placeholders, disabled |
+| Inverted pills | `--contrast` / `--contrast-ink` | `#fafafa` + `#050505` | primary CTAs, active tabs, checked boxes, chip-dark, avatar, segmented active, white icon buttons |
+
+Semantic accents (green/red/amber/blue/neutral soft pairs + mint `#7cefb0`): status chips,
+banners, progress, destructive actions, brand moments only. No shadows anywhere; elevation
+is surface value + spacing. No grey border lines; separation is background stepping. No
+outlined inputs — focus is a soft tint (`--surface-2/3`), never a ring. Icons are Font
+Awesome + Lucide glyphs (no hand-drawn SVG); the favicon is a PNG data URI.
 
 ## Screens & states
 
