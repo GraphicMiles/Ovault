@@ -1,17 +1,18 @@
 """Render a screenshot as color-quantized ASCII (ground-truth visual QA).
-W=white surface, T=surface-2 tint, U=surface-3, S=sage bg, D=dark, K=brand deep,
-G=green accent, g=green soft, A=amber, a=amber soft, R=red, r=red soft,
-B=blue, b=blue soft, M=mint, X=text-dominant (ink glyphs), .=light/empty
+Dark theme letters: K=black canvas (050505), N=Eerie surface (212529),
+T=surface-2 (2b3036), U=surface-3 (363c43), W=Seasalt pills/text (fafafa),
+E=Cadet text (a3a5a9), G/g=accent + soft, A/a=amber, R/r=red, B/b=blue,
+M=mint brand, X=Seasalt alias, .=mid greys/glyph AA (text-dominant cells)
 """
 import sys
 from PIL import Image
 
 PALETTE = [
-    ("W", (250, 250, 250)), ("T", (236, 237, 238)), ("U", (224, 226, 228)),
-    ("N", (163, 165, 169)), ("D", (33, 37, 41)), ("X", (5, 5, 5)),
+    ("K", (5, 5, 5)), ("N", (33, 37, 41)), ("T", (43, 48, 54)), ("U", (54, 60, 67)),
+    ("W", (250, 250, 250)), ("E", (163, 165, 169)),
     ("G", (47, 206, 79)), ("g", (217, 243, 221)), ("A", (236, 165, 28)), ("a", (246, 231, 184)),
     ("R", (224, 82, 73)), ("r", (248, 220, 215)), ("B", (91, 150, 246)), ("b", (221, 232, 251)),
-    ("M", (124, 239, 176)), ("K", (11, 59, 50)),
+    ("M", (124, 239, 176)), ("X", (250, 250, 250)),
 ]
 
 def nearest(px):
