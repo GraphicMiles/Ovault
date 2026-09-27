@@ -1,5 +1,5 @@
 /* ============================================================
-   OVault — UI design system (from reference study)
+   OVault - UI design system (from reference study)
    Rules: no borders, no shadows, compact padding, elevation via
    surface contrast, pill geometry, semantic color, FA icon font.
    ============================================================ */
@@ -8,30 +8,30 @@
 
 :root {
   /* dark monochrome base (Black 050505 · Eerie Black 212529 · Cadet Grey A3A5A9 · Seasalt FAFAFA) */
-  --bg: #050505;              /* Black — app background */
-  --surface: #212529;         /* Eerie Black — elevated surfaces (lighter dark) */
-  --surface-2: #2b3036;       /* derived — insets, soft pills, hovers */
-  --surface-3: #363c43;       /* derived — deeper insets */
-  --dark: #212529;            /* Eerie — chrome panels (rail, toast, hero, demo) */
+  --bg: #050505;              /* Black - app background */
+  --surface: #212529;         /* Eerie Black - elevated surfaces (lighter dark) */
+  --surface-2: #2b3036;       /* derived - insets, soft pills, hovers */
+  --surface-3: #363c43;       /* derived - deeper insets */
+  --dark: #212529;            /* Eerie - chrome panels (rail, toast, hero, demo) */
   --dark-2: #2c3136;
   --brand-deep: #212529;
   --brand-deep-2: #2c3136;
   --brand-mint: #7cefb0;
 
   /* ink (on dark) */
-  --ink: #fafafa;             /* Seasalt — primary text */
-  --ink-2: #a3a5a9;           /* Cadet Grey — secondary text */
-  --ink-3: #8b9096;           /* derived — meta, labels */
-  --ink-4: #767c82;           /* derived — placeholders, disabled */
+  --ink: #fafafa;             /* Seasalt - primary text */
+  --ink-2: #a3a5a9;           /* Cadet Grey - secondary text */
+  --ink-3: #8b9096;           /* derived - meta, labels */
+  --ink-4: #767c82;           /* derived - placeholders, disabled */
   --ink-on-dark: #fafafa;
   --ink-on-dark-2: #a3a5a9;
 
-  /* inverted pills — Seasalt pills with Black text */
+  /* inverted pills - Seasalt pills with Black text */
   --contrast: #fafafa;
   --contrast-ink: #050505;
   --contrast-hover: #dfe1e3;
 
-  /* semantic accents — special UI only (status, feedback, destructive, brand) */
+  /* semantic accents - special UI only (status, feedback, destructive, brand) */
   --accent: #2fce4f;
   --accent-hover: #28bd45;
   --accent-soft: #d9f3dd;
@@ -59,6 +59,11 @@
   --r-sm: 13px;
   --r-xs: 9px;
   --r-pill: 999px;
+  /* one shape system: containers 24 > panels 18 > inner tiles 13 > micro 9; interactive pills full */
+
+  --placeholder: #949aa0;     /* derived - AA on --surface-2 (4.7:1) */
+  --dur: 0.18s;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   --font: "Inter Variable", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
   --font-display: "Inter Tight Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
@@ -134,7 +139,7 @@ img { display: block; max-width: 100%; }
 .rail .logo {
   width: 42px;
   height: 42px;
-  border-radius: 13px;
+  border-radius: var(--r-sm);
   background: var(--accent);
   color: var(--accent-on);
   display: grid;
@@ -145,7 +150,7 @@ img { display: block; max-width: 100%; }
 .rail .rail-btn {
   width: 42px;
   height: 42px;
-  border-radius: 13px;
+  border-radius: var(--r-sm);
   display: grid;
   place-items: center;
   color: var(--ink-on-dark-2);
@@ -205,7 +210,7 @@ img { display: block; max-width: 100%; }
 .user-pill .avatar {
   width: 30px;
   height: 30px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   background: var(--contrast);
   color: var(--contrast-ink);
   display: grid;
@@ -265,7 +270,7 @@ img { display: block; max-width: 100%; }
   flex: none;
 }
 .icon-btn:hover { background: var(--surface-3); color: var(--ink); }
-.icon-btn.round { border-radius: 999px; }
+.icon-btn.round { border-radius: var(--r-pill); }
 .icon-btn.white { background: var(--contrast); color: var(--contrast-ink); }
 .icon-btn.white:hover { background: var(--contrast-hover); }
 .icon-btn.on-dark { background: rgba(255, 255, 255, 0.1); color: var(--ink-on-dark); }
@@ -285,7 +290,7 @@ img { display: block; max-width: 100%; }
   white-space: nowrap;
 }
 .chip i { font-size: 10.5px; }
-.chip .dot { width: 6px; height: 6px; border-radius: 999px; background: currentColor; opacity: 0.9; }
+.chip .dot { width: 6px; height: 6px; border-radius: var(--r-pill); background: currentColor; opacity: 0.9; }
 .chip-green { background: var(--accent-soft); color: var(--accent-ink); }
 .chip-amber { background: var(--amber-soft); color: var(--amber-ink); }
 .chip-red { background: var(--red-soft); color: var(--red-ink); }
@@ -340,7 +345,7 @@ img { display: block; max-width: 100%; }
 .tile-icon {
   width: 30px;
   height: 30px;
-  border-radius: 10px;
+  border-radius: var(--r-xs);
   background: var(--surface-2);
   color: var(--ink-2);
   display: inline-grid;
@@ -440,7 +445,7 @@ a.row:hover, button.row:hover, .row.hoverable:hover { background: var(--surface-
   font: 500 13.5px var(--font);
   color: var(--ink);
 }
-.field input::placeholder { color: var(--ink-4); font-weight: 450; }
+.field input::placeholder { color: var(--placeholder); font-weight: 400; }
 .field:focus-within { background: var(--surface-3); }
 .field:focus-within i { color: var(--ink); }
 .field.on-tint { background: var(--surface-2); }
@@ -451,7 +456,7 @@ a.row:hover, button.row:hover, .row.hoverable:hover { background: var(--surface-
   -webkit-appearance: none;
   width: 21px;
   height: 21px;
-  border-radius: 7px;
+  border-radius: var(--r-xs);
   background: var(--surface-3);
   display: inline-grid;
   place-items: center;
@@ -538,7 +543,7 @@ a.row:hover, button.row:hover, .row.hoverable:hover { background: var(--surface-
   gap: 6px;
   font-size: 13px;
 }
-.crumbs a { color: var(--ink-2); font-weight: 560; padding: 6px 10px; border-radius: 9px; }
+.crumbs a { color: var(--ink-2); font-weight: 560; padding: 6px 10px; border-radius: var(--r-xs); }
 .crumbs a:hover { background: var(--surface-2); color: var(--ink); }
 .crumbs .sep { color: var(--ink-3); font-size: 9px; }
 .crumbs .current { color: var(--ink); font-weight: 680; padding: 4px 8px; }
@@ -619,7 +624,7 @@ a.row:hover, button.row:hover, .row.hoverable:hover { background: var(--surface-
   font-size: clamp(26px, 3.6vw, 38px);
   font-weight: 620;
   letter-spacing: -0.022em;
-  line-height: 1.06;
+  line-height: 1.1;
 }
 .hero-brand .hero-title em {
   font-style: normal;
@@ -655,7 +660,7 @@ a.row:hover, button.row:hover, .row.hoverable:hover { background: var(--surface-
 .orb {
   width: 52px;
   height: 52px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   background: rgba(124, 239, 176, 0.16);
   color: var(--brand-mint);
   display: inline-grid;
@@ -887,4 +892,44 @@ d { padding: 24px; }
   /* in wrap rows, let title blocks take their own line instead of shrinking */
   .rowflex.wrap > .grow { min-width: 200px; }
   .split-signin { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ===== taste pass: numerals, wrap, motion, skeletons, a11y ===== */
+html { scroll-behavior: smooth; }
+body { font-variant-numeric: tabular-nums; }
+h1, h2, .display, .hero-title { text-wrap: balance; }
+.sub, .hero-sub, p { text-wrap: pretty; }
+
+.btn, .icon-btn, .tab, .seg button, .rail-btn, .user-pill {
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), transform 0.08s var(--ease);
+}
+.btn:active, .icon-btn:active, .tab:active, .seg button:active, .rail-btn:active {
+  transform: scale(0.98);
+}
+
+@keyframes skel { from { opacity: 0.55; } to { opacity: 0.95; } }
+.skel { animation: skel 1.5s var(--ease) infinite alternate; }
+
+.skip {
+  position: absolute;
+  left: 16px;
+  top: -64px;
+  z-index: 300;
+  padding: 10px 16px;
+  background: var(--contrast);
+  color: var(--contrast-ink);
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 640;
+  transition: top var(--dur) var(--ease);
+}
+.skip:focus { top: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
 }

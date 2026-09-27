@@ -45,8 +45,20 @@ background dark, elevated surfaces lighter dark. Semantic accents are reserved f
 Semantic accents (green/red/amber/blue/neutral soft pairs + mint `#7cefb0`): status chips,
 banners, progress, destructive actions, brand moments only. No shadows anywhere; elevation
 is surface value + spacing. No grey border lines; separation is background stepping. No
-outlined inputs — focus is a soft tint (`--surface-2/3`), never a ring. Icons are Font
+outlined inputs - focus is a soft tint (`--surface-2/3`), never a ring. Icons are Font
 Awesome + Lucide glyphs (no hand-drawn SVG); the favicon is a PNG data URI.
+
+### Anti-slop taste pass (GraphicMiles/taste-skill applied)
+- Zero em/en dashes in user-visible copy; middle-dot used at most once per metadata line.
+- One shape system: containers 24px, panels 18px, inner tiles 13px, micro 9px, interactive
+  pills full radius. One cool-neutral gray family. Page theme locked dark end to end.
+- Tactile press (`scale(.98)`) + springy `cubic-bezier(.2,.7,.2,1)` transitions on all
+  interactive controls; `prefers-reduced-motion` collapses all motion.
+- Loading = layout-shaped skeleton rows (no spinners); tabular numerals on all data;
+  balanced headline wrapping; italic/display leading protected; placeholder text at
+  WCAG AA (4.7:1) on field backgrounds.
+- Skip-to-content link as first tab stop; `meta description`, `og:*`, `theme-color`,
+  `color-scheme` in the document head.
 
 ## Screens & states
 
