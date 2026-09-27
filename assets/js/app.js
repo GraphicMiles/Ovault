@@ -1,4 +1,4 @@
-/* OVault frontend mockup — client-side only, hard-coded mock data.
+/* OVault frontend mockup - client-side only, hard-coded mock data.
    Routes: #/signin #/ #/pick #/repo/:id #/repo/:id/browse #/file/:id #/settings #/states
    Optional query: ?state=... drives the demo state switcher (page state matrix §91). */
 
@@ -72,9 +72,9 @@ const REPOS = {
 
 const FILETREE = {
   root: [
-    { name: ".github",    type: "Folder", size: "—",     icon: "fa-solid fa-folder",             folder: true },
-    { name: "src",        type: "Folder", size: "—",     icon: "fa-solid fa-folder",             folder: true },
-    { name: "public",     type: "Folder", size: "—",     icon: "fa-solid fa-folder",             folder: true },
+    { name: ".github",    type: "Folder", size: "-",     icon: "fa-solid fa-folder",             folder: true },
+    { name: "src",        type: "Folder", size: "-",     icon: "fa-solid fa-folder",             folder: true },
+    { name: "public",     type: "Folder", size: "-",     icon: "fa-solid fa-folder",             folder: true },
     { name: ".gitignore", type: "Text",   size: "248 B", icon: "fa-solid fa-file-lines" },
     { name: "package.json", type: "JSON", size: "2 KB",  icon: "fa-solid fa-file-code" },
     { name: "README.md",  type: "Markdown", size: "8 KB", icon: "fa-solid fa-file-lines" },
@@ -86,8 +86,8 @@ const FILETREE = {
     { name: "design-specs-final-v2-handoff.zip", type: "ZIP archive", size: "7.4 MB", icon: "fa-solid fa-file-zipper", file: "binary" },
   ],
   src: [
-    { name: "components", type: "Folder", size: "—", icon: "fa-solid fa-folder", folder: true },
-    { name: "utils",      type: "Folder", size: "—", icon: "fa-solid fa-folder", folder: true },
+    { name: "components", type: "Folder", size: "-", icon: "fa-solid fa-folder", folder: true },
+    { name: "utils",      type: "Folder", size: "-", icon: "fa-solid fa-folder", folder: true },
     { name: "app.js",     type: "JavaScript", size: "42 KB", icon: "fa-solid fa-file-code", file: "code" },
     { name: "config.js",  type: "JavaScript", size: "4 KB",  icon: "fa-solid fa-file-code", file: "code" },
     { name: "index.css",  type: "CSS", size: "9 KB", icon: "fa-solid fa-file-code", file: "code" },
@@ -159,14 +159,14 @@ function viewSignin() {
       </div>
       <div class="stack gap-16">
         <h1 class="hero-title">The backup of<br /><em>your backups.</em></h1>
-        <p class="hero-sub">GitHub is where you build. OVault keeps another copy — automatically, quietly, always browsable.</p>
+        <p class="hero-sub">GitHub is where you build. OVault keeps another copy automatically. It stays browsable.</p>
         <div class="plates mt-8">
           <span class="plate">${icon("fa-solid fa-shield-halved")} Monitor</span>
           <span class="plate">${icon("fa-solid fa-box-archive")} Snapshot</span>
           <span class="plate">${icon("fa-solid fa-rotate-left")} Recover</span>
         </div>
       </div>
-      <p class="hero-sub mono" style="font-size:11px">latest version + 5 previous · GitHub only · 5 repositories</p>
+      <p class="hero-sub mono" style="font-size:11px">latest version + 5 previous · GitHub only, 5 repositories</p>
     </section>
     <section class="card card-signin">
       <p class="eyebrow">Welcome back</p>
@@ -240,7 +240,7 @@ function viewDashboard(state) {
           <span class="row-title" style="font-size:14.5px">${r.name}</span>
           ${statusChip(r.status)}
         </div>
-        <div class="row-meta mt-4">${r.owner} / ${r.name} · ${r.visibility} · ${r.branch} · <span class="mono">${r.sha}</span></div>
+        <div class="row-meta mt-4">${r.owner} / ${r.name} · ${r.visibility}, ${r.branch}, <span class="mono">${r.sha}</span></div>
       </div>
       <div class="rowflex gap-8 hide-sm">
         ${needsAttention
@@ -260,10 +260,10 @@ function viewDashboard(state) {
           <div class="row hoverable" style="background:var(--surface-2)">
             <span class="tile-icon" style="background:var(--surface-3)"></span>
             <div class="grow stack gap-8">
-              <div style="height:12px;width:38%;border-radius:99px;background:var(--surface-3)"></div>
-              <div style="height:10px;width:62%;border-radius:99px;background:var(--surface-3)"></div>
+              <div class="skel" style="height:12px;width:38%;border-radius:99px;background:var(--surface-3)"></div>
+              <div class="skel" style="height:10px;width:62%;border-radius:99px;background:var(--surface-3)"></div>
             </div>
-            <div style="height:26px;width:96px;border-radius:99px;background:var(--surface-3)"></div>
+            <div class="skel" style="height:26px;width:96px;border-radius:99px;background:var(--surface-3)"></div>
           </div>`).join("")}
         <p class="meta" style="text-align:center;padding:8px">Loading your vault…</p>
       </div>`;
@@ -273,7 +273,7 @@ function viewDashboard(state) {
       <div class="card" style="text-align:center;padding:48px 24px">
         <span class="tile-icon red" style="width:46px;height:46px;border-radius:14px;font-size:18px">${icon("fa-solid fa-triangle-exclamation")}</span>
         <h2 class="h2 mt-16">Couldn't load your vault</h2>
-        <p class="sub mt-8">The request timed out. Your backups are safe — this is only the list.</p>
+        <p class="sub mt-8">The request timed out. Your backups are safe. This is only the list.</p>
         <button class="btn btn-dark mt-20" type="button" data-action="reload">${icon("fa-solid fa-rotate")} Retry</button>
       </div>`;
   } else if (!connected) {
@@ -294,9 +294,9 @@ function viewDashboard(state) {
         </div>
       </div>
       <div class="stats mt-12">
-        <div class="card compact"><div class="stat-label">${icon("fa-solid fa-bolt")} Automatic</div><div class="stat-sub" style="margin-top:2px">New commits trigger backups within moments — webhooks, not polling.</div></div>
+        <div class="card compact"><div class="stat-label">${icon("fa-solid fa-bolt")} Automatic</div><div class="stat-sub" style="margin-top:2px">New commits trigger backups within moments. Webhooks, not polling.</div></div>
         <div class="card compact"><div class="stat-label">${icon("fa-solid fa-clock-rotate-left")} 6 versions</div><div class="stat-sub" style="margin-top:2px">Latest plus 5 previous, always. Older versions rotate out safely.</div></div>
-        <div class="card compact"><div class="stat-label">${icon("fa-solid fa-lock")} Private</div><div class="stat-sub" style="margin-top:2px">Backups are yours alone — private storage, authenticated downloads.</div></div>
+        <div class="card compact"><div class="stat-label">${icon("fa-solid fa-lock")} Private</div><div class="stat-sub" style="margin-top:2px">Backups are yours alone. Private storage, authenticated downloads.</div></div>
       </div>`;
   } else {
     body = `
@@ -340,7 +340,17 @@ function viewPick(state) {
 
   let list;
   if (loading) {
-    list = `<div class="card" style="text-align:center;padding:40px"><p class="sub">${icon("fa-solid fa-rotate")} Loading repositories…</p></div>`;
+    list = `<div class="card stack gap-10">
+        ${[1, 2, 3, 4].map(() => `
+          <div class="row" style="background:var(--surface)">
+            <span class="skel" style="width:21px;height:21px;border-radius:var(--r-xs);background:var(--surface-2)"></span>
+            <div class="grow stack gap-8">
+              <div class="skel" style="height:12px;width:32%;border-radius:99px;background:var(--surface-2)"></div>
+              <div class="skel" style="height:10px;width:58%;border-radius:99px;background:var(--surface-2)"></div>
+            </div>
+            <div class="skel" style="height:22px;width:72px;border-radius:99px;background:var(--surface-2)"></div>
+          </div>`).join("")}
+      </div>`;
   } else if (error) {
     list = `
       <div class="card" style="text-align:center;padding:40px">
@@ -368,15 +378,15 @@ function viewPick(state) {
     list = `
       ${limitNote}
       <div class="card compact">
-        ${repoLine(REPOS.impose, true, false, "GraphicMiles / impose · Private · main · updated 2 min ago")}
-        ${repoLine(REPOS.nearspace, true, false, "GraphicMiles / nearspace · Public · main · updated 12 min ago")}
-        ${repoLine(REPOS.luna, false, full, "GraphicMiles / luna · Private · main · updated 1 hour ago")}
-        ${repoLine(REPOS["orbit-api"], false, full, "GraphicMiles / orbit-api · Private · main · updated 2 hours ago")}
-        ${repoLine(REPOS.papercut, false, full, "GraphicMiles / papercut · Public · main · updated yesterday")}
+        ${repoLine(REPOS.impose, true, false, "GraphicMiles / impose · Private, main, updated 2 min ago")}
+        ${repoLine(REPOS.nearspace, true, false, "GraphicMiles / nearspace · Public, main, updated 12 min ago")}
+        ${repoLine(REPOS.luna, false, full, "GraphicMiles / luna · Private, main, updated 1 hour ago")}
+        ${repoLine(REPOS["orbit-api"], false, full, "GraphicMiles / orbit-api · Private, main, updated 2 hours ago")}
+        ${repoLine(REPOS.papercut, false, full, "GraphicMiles / papercut · Public, main, updated yesterday")}
         <div class="row hoverable" style="cursor:default;opacity:.55">
           <input class="check" type="checkbox" disabled />
           <div class="grow"><div class="row-title" style="font-size:14px">luna-design</div>
-          <div class="row-meta mt-4">Not accessible — grant access in GitHub</div></div>
+          <div class="row-meta mt-4">Not accessible. Grant access in GitHub</div></div>
           <button class="btn btn-sm btn-soft" type="button">${icon("fa-solid fa-arrow-up-right-from-square")} Open GitHub</button>
         </div>
       </div>
@@ -417,7 +427,7 @@ function viewRepo(id, state) {
 
   const stateBanner = {
     backing_up: `<div class="banner blue mb-16">${icon("fa-solid fa-rotate")}
-        <div class="grow"><b>Creating your first backup of ${r.name}.</b> You can leave this page — we'll keep working.</div>
+        <div class="grow"><b>Creating your first backup of ${r.name}.</b> You can leave this page. We'll keep working.</div>
         <span class="chip chip-blue">Fetching repository…</span></div>`,
     failed: `<div class="banner red mb-16">${icon("fa-solid fa-triangle-exclamation")}
         <div class="grow"><b>The latest version of ${r.name} couldn't be backed up.</b> Last successful backup: 2 hours ago.</div>
@@ -461,7 +471,7 @@ function viewRepo(id, state) {
             <h1 class="display">${r.name}</h1>
             ${statusChip(s === "protected" ? "monitoring" : s === "failed" ? "backup_failed" : s === "backing_up" ? "backing_up" : s === "connection_issue" ? "connection_issue" : s === "unavailable" ? "unavailable_on_github" : "not_monitored")}
           </div>
-          <p class="sub mt-8">${r.owner} / ${r.name} · ${r.visibility} · ${r.branch} · ${r.files} · ${r.size}</p>
+          <p class="sub mt-8">${r.owner} / ${r.name} · ${r.visibility}, ${r.branch}, ${r.files}, ${r.size}</p>
         </div>
         <div class="rowflex gap-8 wrap">
           <a class="btn btn-soft" href="#/repo/${r.id}/browse">${icon("fa-solid fa-folder-open")} Browse files</a>
@@ -624,7 +634,7 @@ function viewFile(kind, state) {
       <div class="card compact">
         <div class="callout red">
           <div class="callout-head">${icon("fa-solid fa-eye-slash")} <span class="grow">Preview hidden</span><span class="chip chip-red">${icon("fa-solid fa-lock")} Secret-like file</span></div>
-          This file may contain secrets, so it is never rendered on screen. You can still download it — downloads require your signed-in session.
+          This file may contain secrets, so it is never rendered on screen. You can still download it. Downloads require your signed-in session.
         </div>
       </div>`;
   } else if (image) {
@@ -646,7 +656,7 @@ function viewFile(kind, state) {
           <h2 class="h2 grow">Preview</h2>
           <span class="chip chip-grey">Read-only</span>
         </div>
-        <div class="preview"><span class="ln">1</span><span class="cm">// backup worker — retries with exponential backoff</span>
+        <div class="preview"><span class="ln">1</span><span class="cm">// backup worker: retries with exponential backoff</span>
 <span class="ln">2</span><span class="kw">export async function</span> capture(repo, sha) {
 <span class="ln">3</span>  <span class="kw">const</span> archive = <span class="kw">await</span> github.archive(repo, sha);
 <span class="ln">4</span>  <span class="kw">await</span> storage.put(key(repo, sha), archive);
@@ -686,7 +696,7 @@ function viewSettings(state) {
               <div class="row hoverable" style="cursor:default">
                 <div class="grow">
                   <div class="row-title">Connected as @${USER.githubUser}</div>
-                  <div class="row-meta mt-4">GitHub App installed · contents read-only · webhooks subscribed</div>
+                  <div class="row-meta mt-4">GitHub App installed · contents read-only, webhooks subscribed</div>
                 </div>
               </div>
             </div>
@@ -784,7 +794,7 @@ function viewStates() {
         <section class="card compact">
           <div class="card-head"><span class="tile-icon">${icon("fa-solid fa-pen-to-square")}</span><h2 class="h2 grow">Inputs</h2></div>
           <div class="stack gap-10">
-            <div class="field">${icon("fa-solid fa-magnifying-glass")}<input type="text" placeholder="Focused fields tint softly — no rings" /></div>
+            <div class="field">${icon("fa-solid fa-magnifying-glass")}<input type="text" placeholder="Focused fields tint softly. No rings." /></div>
             <div class="field">${icon("fa-solid fa-pen")}<input type="text" value="impose" /></div>
             <div class="seg"><button class="active" type="button">7 days</button><button type="button">30 days</button><button type="button">90 days</button></div>
           </div>
@@ -806,7 +816,7 @@ function viewStates() {
               <span class="orb filled" style="width:42px;height:42px;font-size:15px">${icon("fa-solid fa-download")}</span>
               <div class="grow">
                 <div style="font-weight:650">Preparing your download</div>
-                <div class="meta" style="color:var(--ink-on-dark-2)">You can leave this page — it will be ready here.</div>
+                <div class="meta" style="color:var(--ink-on-dark-2)">You can leave this page. It will be ready here.</div>
               </div>
             </div>
           </div>
