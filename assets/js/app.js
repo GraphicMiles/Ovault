@@ -166,7 +166,7 @@ function viewSignin() {
           <span class="plate">${icon("fa-solid fa-rotate-left")} Recover</span>
         </div>
       </div>
-      <p class="hero-sub mono" style="font-size:11px">latest version + 5 previous · GitHub only, 5 repositories</p>
+      <p class="hero-sub mono" style="font-size:12px">latest version + 5 previous · GitHub only, 5 repositories</p>
     </section>
     <section class="card card-signin">
       <p class="eyebrow">Welcome back</p>
@@ -383,12 +383,12 @@ function viewPick(state) {
         ${repoLine(REPOS.luna, false, full, "GraphicMiles / luna · Private, main, updated 1 hour ago")}
         ${repoLine(REPOS["orbit-api"], false, full, "GraphicMiles / orbit-api · Private, main, updated 2 hours ago")}
         ${repoLine(REPOS.papercut, false, full, "GraphicMiles / papercut · Public, main, updated yesterday")}
-        <div class="row hoverable" style="cursor:default;opacity:.55">
+        <label class="row hoverable" style="cursor:default;opacity:.55">
           <input class="check" type="checkbox" disabled />
           <div class="grow"><div class="row-title" style="font-size:14px">luna-design</div>
           <div class="row-meta mt-4">Not accessible. Grant access in GitHub</div></div>
           <button class="btn btn-sm btn-soft" type="button">${icon("fa-solid fa-arrow-up-right-from-square")} Open GitHub</button>
-        </div>
+        </label>
       </div>
       <div class="card compact mt-12 rowflex wrap gap-12">
         <div class="grow">
