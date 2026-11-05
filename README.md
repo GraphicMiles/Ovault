@@ -59,6 +59,7 @@ Open http://localhost:8765. Any static server works; there is no build step.
 | `assets/fa/` | Font Awesome, bundled. |
 | `assets/fonts/` | Inter and Inter Tight variable fonts, bundled. |
 | `tools/serve.mjs` | Static server used by the app, the tests and CI. |
+| `tools/gate.mjs` | Layout gate: every view at five widths, blocking checks fail the run. |
 | `tools/qa.mjs` | Playwright layout and constraint audit. |
 | `tools/shot.mjs` | Screenshot harness, every view at four breakpoints. |
 | `tools/cmap.py` | Colour-quantised ASCII visual check. |
@@ -75,6 +76,7 @@ from background stepping rather than border lines.
 npm install
 npm start                # static server on :4180
 npm test                 # Playwright smoke suite, desktop and phone
+npm run gate             # layout gate at five widths, exits 1 on a blocking defect
 npm run test:qa          # layout and constraint audit
 npm run shots            # writes shots/ for visual review
 ```
@@ -86,9 +88,19 @@ that every route renders without a console error and that nothing scrolls
 sideways on a 390 pixel wide screen. It runs twice, once at desktop size and once
 as a phone.
 
-`npm run test:qa` is the layout audit: it walks the same routes at 390, 768, 1280
-and 1512 pixels wide and fails on overflow, clipped text and broken constraints.
-`.github/workflows/ci.yml` runs the smoke suite on every push and pull request.
+`npm run gate` is the layout gate. It starts its own server and renders every view
+at 360, 390, 768, 1024 and 1440 pixels wide, then measures what a phone reviewer
+would see: horizontal overflow, clipped text, text under 12px, mobile body text
+under 15px, text columns narrower than 240px, card rows still side by side on a
+phone, controls under 44px tall, Unicode glyphs used as icons, contrast against
+the surface behind the text, hue families, spacing off the scale, section widths,
+nested containers and the browser focus ring. Blocking checks fail the run and
+print the element that caused them.
+
+`npm run test:qa` is the older layout audit: it walks the same routes at 390, 768,
+1280 and 1512 pixels wide and fails on overflow, clipped text and broken
+constraints. `.github/workflows/ci.yml` runs the smoke suite and the gate on every
+push and pull request.
 
 ## Licence
 
