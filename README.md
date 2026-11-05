@@ -1,80 +1,84 @@
-# OVault — Frontend Mockup
+# OVault
 
-> **The backup of your backups.** Connect GitHub, pick up to 5 repositories, and OVault keeps the latest version plus 5 previous ones — browseable like a file manager.
+A backup of your backups. Connect GitHub, choose up to five repositories, and
+OVault keeps the latest version of every file alongside the five versions before
+it, browsable the way you browse a folder.
 
-This repository contains the **frontend mockup** for OVault: a fully client-side HTML/CSS/JS build with hard-coded mock data. No backend required to run it.
+This repository is the frontend mockup of that product: a complete, clickable
+interface with hard-coded data. It runs in a browser with no server, no GitHub
+connection and no network calls.
 
-## Run
+## Why it exists
 
-Serve the folder with any static server:
+A repository can be force-pushed, a branch deleted, a laptop lost. Git protects
+the history of the code but not the thing most people actually worry about: the
+version of a file they shipped last week and no longer have. OVault is a design
+investigation into what that safety net looks like when it is a file manager
+rather than a git log.
+
+## What you can do
+
+- **Browse a connected repository** as a file tree, with folders, file types and
+  the last time each file changed.
+- **Open a file and step back** through its previous versions, with the current
+  one marked.
+- **Add repositories** from the picker, up to five.
+- **Look at the states the product needs and not only the happy one**: empty
+  account, failed connection, loading, and search with no results. The demo bar
+  and the `#/states` route let you jump between them.
+- **Run a design audit.** The interface is checked against its own layout rules
+  by a script in `tools/`, at four viewport widths.
+
+Routes: `#/signin`, `#/` (dashboard), `#/pick` (repository picker),
+`#/repo/<name>`, `#/repo/<name>/browse`, `#/file/code`, `#/settings`,
+`#/states`.
+
+## Running it
 
 ```bash
 python3 -m http.server 8765
 ```
 
-Open http://localhost:8765 — the app is hash-routed (`#/`, `#/pick`, `#/repo/impose`, `#/repo/impose/browse`, `#/file/code`, `#/settings`, `#/states`, `#/signin`).
+Open http://localhost:8765. Any static server works; there is no build step.
 
-## Structure
+## What is not here
+
+- The GitHub connection is simulated. Every repository, file and version in the
+  interface comes from the mock data in `assets/js/app.js`.
+- Nothing is stored. Reloading the page resets the demo state.
+- Retention is fixed at five previous versions in this mockup.
+- There is no backend, no authentication and no billing.
+
+## How it is built
 
 | Path | Purpose |
 |---|---|
-| `index.html` | App shell (hash-routed SPA) |
-| `assets/css/app.css` | Design system + components |
-| `assets/js/app.js` | Views, mock data, modals, demo state switcher |
-| `assets/fa/` | FontAwesome icon font (bundled, no CDN) |
-| `assets/fonts/` | Inter / Inter Tight variable fonts (bundled) |
-| `tools/qa.mjs` | Playwright UI/UX audit (constraints + layout) |
-| `tools/shot.mjs` | Screenshot harness — 20 pages × 4 breakpoints |
-| `tools/cmap.py` | Color-quantized ASCII visual audit |
-| `shots/` | Breakpoint screenshots (mobile / tablet / desktop / wide) |
+| `index.html` | The app shell. One page, hash-routed. |
+| `assets/css/app.css` | Design system and components. |
+| `assets/js/app.js` | Views, mock data, modals, the demo state switcher. |
+| `assets/fa/` | Font Awesome, bundled. |
+| `assets/fonts/` | Inter and Inter Tight variable fonts, bundled. |
+| `tools/qa.mjs` | Playwright layout and constraint audit. |
+| `tools/shot.mjs` | Screenshot harness, every view at four breakpoints. |
+| `tools/cmap.py` | Colour-quantised ASCII visual check. |
+| `shots/` | Breakpoint captures written by `tools/shot.mjs`. |
 
-## Design system — monochrome base (dark arrangement), semantic accents
+The palette is a monochrome base arranged dark, with semantic accents used only
+for status: green, red, amber, blue and a mint for positive moments. Elevation
+comes from surface value and spacing rather than shadows, and separation comes
+from background stepping rather than border lines.
 
-The locked 4-tone palette governs the base UI; this build arranges it **dark** — app
-background dark, elevated surfaces lighter dark. Semantic accents are reserved for special UI.
-
-| Role | Token | Hex | Use |
-|---|---|---|---|
-| App background | `--bg` | `#050505` (Black) | canvas, recessed code preview |
-| Surfaces | `--surface` | `#212529` (Eerie Black) | cards, rail, topbar chrome, modal, toast, hero, demo bar |
-| Surface insets | `--surface-2` / `--surface-3` | `#2b3036` / `#363c43` (derived) | fields, soft pills, unchecked checks, hover states |
-| Text | `--ink` / `--ink-2` | `#fafafa` (Seasalt) / `#a3a5a9` (Cadet Grey) | headings / secondary |
-| Text meta | `--ink-3` / `--ink-4` | `#8b9096` / `#767c82` (derived) | labels, placeholders, disabled |
-| Inverted pills | `--contrast` / `--contrast-ink` | `#fafafa` + `#050505` | primary CTAs, active tabs, checked boxes, chip-dark, avatar, segmented active, white icon buttons |
-
-Semantic accents (green/red/amber/blue/neutral soft pairs + mint `#7cefb0`): status chips,
-banners, progress, destructive actions, brand moments only. No shadows anywhere; elevation
-is surface value + spacing. No grey border lines; separation is background stepping. No
-outlined inputs - focus is a soft tint (`--surface-2/3`), never a ring. Icons are Font
-Awesome + Lucide glyphs (no hand-drawn SVG); the favicon is a PNG data URI.
-
-### Anti-slop taste pass (GraphicMiles/taste-skill applied)
-- Zero em/en dashes in user-visible copy; middle-dot used at most once per metadata line.
-- One shape system: containers 24px, panels 18px, inner tiles 13px, micro 9px, interactive
-  pills full radius. One cool-neutral gray family. Page theme locked dark end to end.
-- Tactile press (`scale(.98)`) + springy `cubic-bezier(.2,.7,.2,1)` transitions on all
-  interactive controls; `prefers-reduced-motion` collapses all motion.
-- Loading = layout-shaped skeleton rows (no spinners); tabular numerals on all data;
-  balanced headline wrapping; italic/display leading protected; placeholder text at
-  WCAG AA (4.7:1) on field backgrounds.
-- Skip-to-content link as first tab stop; `meta description`, `og:*`, `theme-color`,
-  `color-scheme` in the document head.
-
-## Screens & states
-
-Sign-in · Dashboard (populated, empty, loading, error, connection lost) · Repo picker (draft selections, 5/5 limit) · Repository detail (protected, backing up, failed, connection issue, deleted on GitHub, not monitored) · File browser (files, empty, processing, error) · File detail (code preview, secret-file preview blocklist, image) · Settings (with danger zone) · UI state gallery.
-
-Use the floating **“Demo states”** pill (bottom-right) to walk every page-state-matrix row.
-
-## QA
+### Checks
 
 ```bash
-npm install            # installs playwright (dev tooling)
-node tools/qa.mjs      # 0-issue gate: shadows, borders, outlines, overflow, tap targets, icons, fonts, padding
-node tools/shot.mjs    # regenerates shots/
-python3 tools/cmap.py shots/dash-desktop.png
+npm install
+python3 -m http.server 8765 &
+node tools/qa.mjs        # prints violations per page and viewport, exits 1 on failure
+node tools/shot.mjs      # writes shots/ for visual review
 ```
 
-## Product notes
+`qa.mjs` walks the same routes at 390, 768, 1280 and 1512 pixels wide.
 
-Built against the OVault PRD v3: 5-repo server-side limit, retention of latest + 5 previous snapshots (commit-SHA identity), "previous versions" — never git history, GitHub App architecture, and a full page state matrix (§91). Backend wiring comes next.
+## Licence
+
+ISC, see `LICENSE`.
