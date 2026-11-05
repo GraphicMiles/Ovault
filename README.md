@@ -58,6 +58,7 @@ Open http://localhost:8765. Any static server works; there is no build step.
 | `assets/js/app.js` | Views, mock data, modals, the demo state switcher. |
 | `assets/fa/` | Font Awesome, bundled. |
 | `assets/fonts/` | Inter and Inter Tight variable fonts, bundled. |
+| `tools/serve.mjs` | Static server used by the app, the tests and CI. |
 | `tools/qa.mjs` | Playwright layout and constraint audit. |
 | `tools/shot.mjs` | Screenshot harness, every view at four breakpoints. |
 | `tools/cmap.py` | Colour-quantised ASCII visual check. |
@@ -72,12 +73,22 @@ from background stepping rather than border lines.
 
 ```bash
 npm install
-python3 -m http.server 8765 &
-node tools/qa.mjs        # prints violations per page and viewport, exits 1 on failure
-node tools/shot.mjs      # writes shots/ for visual review
+npm start                # static server on :4180
+npm test                 # Playwright smoke suite, desktop and phone
+npm run test:qa          # layout and constraint audit
+npm run shots            # writes shots/ for visual review
 ```
 
-`qa.mjs` walks the same routes at 390, 768, 1280 and 1512 pixels wide.
+`npm test` walks the journeys a person actually takes: sign in, the repository
+list, a repository, its file browser, a file, the empty vault, a lost connection,
+a failed backup, settings and the guard on a destructive action. It also asserts
+that every route renders without a console error and that nothing scrolls
+sideways on a 390 pixel wide screen. It runs twice, once at desktop size and once
+as a phone.
+
+`npm run test:qa` is the layout audit: it walks the same routes at 390, 768, 1280
+and 1512 pixels wide and fails on overflow, clipped text and broken constraints.
+`.github/workflows/ci.yml` runs the smoke suite on every push and pull request.
 
 ## Licence
 
