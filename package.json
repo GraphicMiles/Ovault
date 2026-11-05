@@ -6,7 +6,8 @@
     "start": "node tools/serve.mjs",
     "test": "playwright test",
     "test:qa": "node tools/qa.mjs",
-    "shots": "node tools/shot.mjs"
+    "shots": "node tools/shot.mjs",
+    "gate": "node tools/gate.mjs"
   },
   "keywords": [
     "backup",
