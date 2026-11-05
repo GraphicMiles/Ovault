@@ -126,7 +126,7 @@ function toast(msg, ico = "fa-solid fa-circle-check") {
 function topbar({ tabs = [], active = "", title = "" }) {
   return `
   <header class="topbar">
-    ${title ? `<h1 class="h2 mobile-title">${esc(title)}</h1>` : ""}
+    ${title ? `<span class="h2 mobile-title" aria-hidden="true">${esc(title)}</span>` : ""}
     <nav class="tabbar" aria-label="Sections">
       ${tabs.map((t) => `<a class="tab ${t.id === active ? "active" : ""}" href="${t.href}">${esc(t.label)}</a>`).join("")}
     </nav>
